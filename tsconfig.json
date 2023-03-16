@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "noEmitOnError": false,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "outDir": "./dist/types",
+    "preserveConstEnums": true,
+    "resolveJsonModule": true,
+    "rootDir": "./src/",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": false,
+    "target": "es6",
+    "lib": ["DOM", "ES2021", "DOM.Iterable", "ScriptHost"]
+  },
+  "include": ["src/*.ts", "src/**/*.ts", "test/*.ts", "test/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

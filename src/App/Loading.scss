@@ -1,0 +1,20 @@
+.app {
+  .loading-screen {
+    align-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.85);
+    box-sizing: border-box;
+    color: rgb(232, 232, 232);
+    display: flex;
+    font-family: Menlo, Consolas, monospace;
+    font-size: large;
+    height: 100vh;
+    inset: 0;
+    line-height: 1.2;
+    overflow: auto;
+    padding: 2rem;
+    position: fixed;
+    white-space: pre-wrap;
+    width: 100vw;
+  }
+}

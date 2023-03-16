@@ -1,0 +1,106 @@
+{
+  "name": "weather-app",
+  "version": "1.0",
+  "description": "Starter for TS React projects",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:constnazarenko/weather-app.git"
+  },
+  "keywords": [
+    "ts",
+    "starter"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
+  "files": [
+    "src/*",
+    "dist/*"
+  ],
+  "author": {
+    "name": "Kostiantyn Nazarenko",
+    "email": "const@nazarenko.es"
+  },
+  "homepage": "https://github.com/constnazarenko/weather-app",
+  "private": false,
+  "dependencies": {
+    "classnames": "2.3.2",
+    "moment": "2.29.4",
+    "react-redux": "8.0.5",
+    "redux": "4.2.1",
+    "redux-logger": "3.0.6",
+    "redux-saga": "1.2.2",
+    "immer": "9.0.19"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "@types/react-redux": "7.1.25",
+    "@types/redux-logger": "3.0.9",
+    "@typescript-eslint/eslint-plugin": "5.54.1",
+    "@typescript-eslint/parser": "5.54.1",
+    "clean-webpack-plugin": "4.0.0",
+    "copy-webpack-plugin": "11.0.0",
+    "css-loader": "6.7.3",
+    "eslint": "8.36.0",
+    "eslint-config-prettier": "8.7.0",
+    "file-loader": "6.2.0",
+    "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.3",
+    "lint-staged": "13.2.0",
+    "mini-css-extract-plugin": "2.7.3",
+    "npm-check": "6.0.1",
+    "prettier": "2.8.4",
+    "prettier-plugin-organize-imports": "3.2.2",
+    "react": "18.2.0",
+    "react-bootstrap": "2.7.2",
+    "react-dom": "18.2.0",
+    "sass": "1.59.2",
+    "sass-loader": "13.2.0",
+    "source-map-explorer": "2.5.3",
+    "stylelint-config-sass-guidelines": "9.0.1",
+    "source-map-loader": "4.0.1",
+    "style-loader": "3.3.1",
+    "stylelint": "14.16.1",
+    "stylelint-config-prettier-scss": "0.0.1",
+    "ts-loader": "9.4.2",
+    "typescript": "4.9.5",
+    "webpack": "5.76.1",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.11.1",
+    "webpack-merge": "5.8.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-bootstrap": ">=1.6.4",
+    "react-dom": ">=18.2.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "check-types": "tsc",
+    "compile": "tsc -p .",
+    "posttest": "npm run check-types",
+    "predeploy": "npm run build",
+    "prepare": "npm run compile && husky install",
+    "pretest": "npm run compile",
+    "start": "webpack serve --config webpack.dev.js",
+    "test": "npm run compile",
+    "analyze": "source-map-explorer 'dist/*.js' --html bundle-analysis.html",
+    "upgrade-interactive": "npm-check --update --save-exact",
+    "linter": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "linter-fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "prettier": "prettier --write --ignore-unknown src/ ./package.json ./README.md",
+    "prettier-check": "prettier --check src/ ./package.json ./README.md"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss}": "stylelint --fix",
+    "*.{css,scss,md}": "prettier --write"
+  },
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">12"
+  }
+}
