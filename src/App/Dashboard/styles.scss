@@ -1,0 +1,10 @@
+.cities {
+  display: flex;
+  flex-wrap: wrap;
+
+  .city {
+    height: 250px;
+    margin: 10px;
+    width: 250px;
+  }
+}

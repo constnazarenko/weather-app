@@ -51,5 +51,24 @@ export function* loader(
   }
 }
 
+export function* loaderData(
+  uri: string,
+  params: Record<string, string | number>,
+  success: string,
+  failure: string,
+  authorization?: string
+) {
+  try {
+    const { data, err } = yield call(fetchJson, uri, params, authorization);
+    if (data) {
+      return data;
+    } else {
+      yield put({ type: failure, ...err });
+    }
+  } catch (e) {
+    yield put({ type: failure, message: e.message });
+  }
+}
+
 export const isString = (value: any) =>
   typeof value === "string" || value instanceof String;
