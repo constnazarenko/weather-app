@@ -4,6 +4,7 @@ const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = merge(common, {
   mode: "production",
@@ -14,38 +15,6 @@ module.exports = merge(common, {
     libraryTarget: "umd",
     globalObject: "this",
     umdNamedDefine: true,
-  },
-  externals: {
-    react: {
-      root: "React",
-      commonjs2: "react",
-      commonjs: "react",
-      amd: "react",
-    },
-    "react-dom": {
-      root: "ReactDOM",
-      commonjs2: "react-dom",
-      commonjs: "react-dom",
-      amd: "react-dom",
-    },
-    "prop-types": {
-      root: "PropTypes",
-      commonjs: "prop-types",
-      commonjs2: "prop-types",
-      amd: "prop-types",
-    },
-    "react-dom/server": {
-      root: "ReactDOMServer",
-      commonjs: "react-dom/server",
-      commonjs2: "react-dom/server",
-      amd: "react-dom/server",
-    },
-    "react-addons-transition-group": {
-      commonjs: "react-addons-transition-group",
-      commonjs2: "react-addons-transition-group",
-      amd: "react-addons-transition-group",
-      root: ["React", "addons", "TransitionGroup"],
-    },
   },
   optimization: {
     minimize: true,
@@ -58,6 +27,10 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       "process.env.LOCAL": "false",
       "process.env.VERSION": JSON.stringify(process.env.npm_package_version),
+    }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html",
     }),
   ],
   module: {

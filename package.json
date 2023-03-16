@@ -26,6 +26,8 @@
     "classnames": "2.3.2",
     "moment": "2.29.4",
     "bootstrap": "5.2.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-redux": "8.0.5",
     "redux": "4.2.1",
     "redux-logger": "3.0.6",
@@ -52,8 +54,6 @@
     "npm-check": "6.0.1",
     "prettier": "2.8.4",
     "prettier-plugin-organize-imports": "3.2.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "sass": "1.59.2",
     "sass-loader": "13.2.0",
     "source-map-explorer": "2.5.3",
@@ -68,10 +68,6 @@
     "webpack-cli": "5.0.1",
     "webpack-dev-server": "4.11.1",
     "webpack-merge": "5.8.0"
-  },
-  "peerDependencies": {
-    "react": ">=18.2.0",
-    "react-dom": ">=18.2.0"
   },
   "scripts": {
     "build": "webpack --config webpack.prod.js",
