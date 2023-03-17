@@ -1,10 +1,11 @@
 import classNames from "classnames";
-import React, { FC, useEffect } from "react";
+import React, { FC, Suspense, useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.css";
 import { loadAppFunc } from "./actions";
+import City from "./City";
 import Dashboard from "./Dashboard";
-import { Loading } from "./Loading";
+import { Index } from "./Loading";
 import "./styles.scss";
 
 export interface AppProps {
@@ -14,18 +15,30 @@ export interface AppProps {
 export interface AppActions {
   load: loadAppFunc;
 }
+export interface CityWeather {
+  coord: { lon: number; lat: number };
+  main: { temp: number; temp_max: number; temp_min: number };
+  weather: { description: string; icon: string; id: number; main: string }[];
+  name: string;
+
+  [key: string]: unknown;
+}
 
 const App: FC<AppProps & AppActions> = (props) => {
   useEffect(() => {
     props.load();
   }, []);
 
+  // TODO: Usually for such cases you want to use Redux as it present in current project.
+  // But in this case State used for demo purposes.
+  const [selectedCity, selectCity] = useState<CityWeather | null>();
+
   return (
     <div className={classNames({ app: true, no: false })}>
-      {props.loading && <Loading />}
+      {props.loading && <Index />}
 
       <header className="mb-4">
-        <div className="navbar navbar-dark bg-dark box-shadow">
+        <div className="navbar navbar-dark bg-primary box-shadow">
           <div className="container d-flex justify-content-between">
             <a href="#" className="navbar-brand d-flex align-items-center">
               <strong>Weather APP example</strong>
@@ -34,18 +47,23 @@ const App: FC<AppProps & AppActions> = (props) => {
         </div>
       </header>
 
-      {/*<section className="jumbotron text-center">*/}
-      {/*  <div className="container">*/}
-      {/*    <h1 className="jumbotron-heading">Weather app example</h1>*/}
-      {/*    <p className="lead text-muted">Data fetched from public APIs.</p>*/}
-      {/*    <p>*/}
-      {/*      <a href="#" className="btn btn-primary my-2">Main call to action</a>*/}
-      {/*      <a href="#" className="btn btn-secondary my-2">Secondary action</a>*/}
-      {/*    </p>*/}
-      {/*  </div>*/}
-      {/*</section>*/}
-
-      <Dashboard />
+      {!selectedCity && <Dashboard onSelect={selectCity} />}
+      {!!selectedCity && (
+        <section>
+          <div className="container p-0">
+            <a
+              href="#"
+              onClick={() => selectCity(null)}
+              className="btn btn-info text-bg-light my-2"
+            >
+              Go back to Dashboard
+            </a>
+          </div>
+          <Suspense fallback={<Index />}>
+            <City cw={selectedCity} />
+          </Suspense>
+        </section>
+      )}
     </div>
   );
 };

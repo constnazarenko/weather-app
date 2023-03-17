@@ -12,10 +12,6 @@ const fetchAttributes = (url) =>
   fetch(url)
     .then((r) => r.json())
     .then((r) => {
-      console.log(r);
-      return r;
-    })
-    .then((r) => {
       const photo =
         r._embedded?.["city:search-results"]?.[0]?._embedded?.["city:item"]
           ._embedded?.["city:urban_area"]?._embedded?.["ua:images"]?.photos?.[0]
@@ -60,7 +56,6 @@ function* load(action: LoadAction) {
     requests.push(getCitysPhotos(cities[i], key));
   }
   const results = yield Promise.all(requests);
-  console.log("results", results);
   yield put({ type: DB_FETCH_JSON_SUCCESS, payload: results });
 
   yield put({ type: REMOVE_LOADING_SPINNER });

@@ -1,3 +1,19 @@
+:root {
+  --clr-0: #fff;
+  --clr-grn-1: #052b2f;
+  --clr-grn-2: #073438;
+  --clr-grn-3: #0e4b50;
+  --clr-grn-4: #2d8f85;
+  --clr-grn-5: #637c54;
+
+  --clr-blue-1: #052b2f;
+  --clr-blue-2: #073438;
+  --clr-blue-3: #0062ad;
+  --clr-blue-4: #28a7d2;
+  --clr-blue-5: #4dcaff;
+}
+
 body {
-  background: #f0f8ff;
+  background: var(--clr-0);
+  min-width: 330px;
 }

@@ -1,10 +1,44 @@
-.cities {
-  display: flex;
-  flex-wrap: wrap;
+@property --gradient-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
+}
 
-  .city {
-    height: 250px;
-    margin: 10px;
-    width: 250px;
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+  }
+
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+.dashboard {
+  .card {
+    border-width: 0;
+    cursor: pointer;
+  }
+
+  .card::before,
+  .card::after {
+    background: conic-gradient(
+      from var(--gradient-angle),
+      var(--clr-blue-3),
+      var(--clr-blue-4),
+      var(--clr-blue-5),
+      var(--clr-blue-4),
+      var(--clr-blue-3)
+    );
+    border-radius: inherit;
+    content: "";
+    inset: -0.025rem;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .card:hover::after {
+    animation: rotation 2s linear infinite;
+    filter: blur(0.75rem);
   }
 }

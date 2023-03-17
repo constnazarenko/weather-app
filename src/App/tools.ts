@@ -70,5 +70,7 @@ export function* loaderData(
   }
 }
 
-export const isString = (value: any) =>
+export const isString = (value: unknown) =>
   typeof value === "string" || value instanceof String;
+
+export const kelvin2c = (degree: number) => Math.round(degree - 273.15);

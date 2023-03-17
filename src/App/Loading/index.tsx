@@ -1,5 +1,5 @@
 import React from "react";
-import "./Loading.scss";
-export function Loading() {
+import "./styles.scss";
+export function Index() {
   return <div className="loading-screen">🌀 Loading...</div>;
 }

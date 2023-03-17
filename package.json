@@ -1,14 +1,13 @@
 {
   "name": "weather-app",
   "version": "1.0",
-  "description": "Starter for TS React projects",
+  "description": "Weather APP example",
   "repository": {
     "type": "git",
     "url": "ssh://git@github.com:constnazarenko/weather-app.git"
   },
   "keywords": [
-    "ts",
-    "starter"
+    "weather"
   ],
   "main": "./dist/index.js",
   "types": "./dist/types/index.d.ts",
