@@ -40,9 +40,9 @@ const App: FC<AppProps & AppActions> = (props) => {
       <header className="mb-4">
         <div className="navbar navbar-dark bg-primary box-shadow">
           <div className="container d-flex justify-content-between">
-            <a href="#" className="navbar-brand d-flex align-items-center">
+            <div className="navbar-brand d-flex align-items-center">
               <strong>Weather APP example</strong>
-            </a>
+            </div>
           </div>
         </div>
       </header>
@@ -53,7 +53,10 @@ const App: FC<AppProps & AppActions> = (props) => {
           <div className="container p-0">
             <a
               href="#"
-              onClick={() => selectCity(null)}
+              onClick={(e) => {
+                e.preventDefault();
+                selectCity(null);
+              }}
               className="btn btn-info text-bg-light my-2"
             >
               Go back to Dashboard
