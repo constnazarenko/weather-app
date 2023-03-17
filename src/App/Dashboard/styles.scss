@@ -16,7 +16,7 @@
 
 .dashboard {
   .card {
-    border-width: 0;
+    border: 1px solid var(--clr-blue-5);
     cursor: pointer;
   }
 
@@ -32,7 +32,7 @@
     );
     border-radius: inherit;
     content: "";
-    inset: -0.025rem;
+    inset: -0.075rem;
     position: absolute;
     z-index: -1;
   }
