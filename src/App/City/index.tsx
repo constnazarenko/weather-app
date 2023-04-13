@@ -1,11 +1,21 @@
 import React, { FC, useEffect, useState } from "react";
 
 import moment from "moment/moment";
-import { CityWeather } from "./component";
-import { kelvin2c } from "./tools";
+import { CityWeather } from "../component";
+import { kelvin2c } from "../tools";
+
+import "./styles.scss";
 
 export interface CityProps {
   cw: CityWeather;
+}
+export interface AggregatedList {
+  [k: number]: {
+    date: Date;
+    weather: string;
+    min: number;
+    max: number;
+  };
 }
 
 interface Forcast {
@@ -51,29 +61,57 @@ interface Forcast {
     wind: { speed: number; deg: number; gust: number };
   }[];
   message: number;
+  aggregatedList?: AggregatedList;
 }
 
 export const useWeatherForecast = (url) => {
   const [state, setState] = useState<Forcast>(null);
 
   useEffect(() => {
-    const dataFetch = async () => {
-      const data = await (await fetch(url)).json();
+    let ignore = false;
 
-      setState(data);
+    const dataFetch = async () => {
+      const data: Forcast = await (await fetch(url)).json();
+
+      const aggregatedData: AggregatedList = {};
+      data.list.forEach((d) => {
+        const date = new Date(d.dt_txt);
+        if (!aggregatedData[date.getDate()]) {
+          aggregatedData[date.getDate()] = {
+            date: date,
+            weather: d.weather?.[0]?.description,
+            min: d.main.temp_min,
+            max: d.main.temp_max,
+          };
+        } else {
+          if (aggregatedData[date.getDate()].min > d.main.temp_min) {
+            aggregatedData[date.getDate()].min = d.main.temp_min;
+          }
+          if (aggregatedData[date.getDate()].max < d.main.temp_max) {
+            aggregatedData[date.getDate()].max = d.main.temp_max;
+          }
+        }
+      });
+      data.aggregatedList = aggregatedData;
+
+      if (!ignore) {
+        setState(data);
+      }
     };
 
     dataFetch();
+
+    return () => {
+      ignore = true;
+    };
   }, [url]);
 
   return { forecast: state };
 };
 
-const City: FC<CityProps> = (props) => {
-  //TODO: Beware! Hardcoded keys in links is obviously a no-no in real projects!
+const Index: FC<CityProps> = (props) => {
   const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${props.cw.coord.lat}&lon=${props.cw.coord.lon}&appid=1827d8bc8210ab01b28b1546b538dd9d`;
   const { forecast } = useWeatherForecast(url);
-  console.log("@@@###", props.cw, forecast);
 
   const { cw } = props;
 
@@ -110,40 +148,32 @@ const City: FC<CityProps> = (props) => {
         <div className="col container">
           <div className="row">
             {forecast &&
-              forecast.list
-                .filter((day) => {
-                  //TODO: probably data should be aggregated somewhere else
-                  //TODO: but as this is demo only, one midday reading will be sufficient.
-                  return parseInt(moment.unix(day.dt).format("HH")) === 14;
-                })
-                .map((day) => (
-                  <div key={day.dt} className="col">
-                    <div
-                      key={day.dt}
-                      className="container card mb-4 box-shadow p-3 cw-card"
-                    >
-                      <div className="row">
-                        <h1>{kelvin2c(day.main.temp)}°</h1>
-                      </div>
-                      <div className="row">
-                        <div className="col text-nowrap">
-                          <small>{day.weather?.[0]?.main}</small>
-                          <br />
-                          <small>
-                            Max. {kelvin2c(day.main.temp_max)}° Min.{" "}
-                            {kelvin2c(day.main.temp_min)}°
-                          </small>
-                        </div>
-                      </div>
-
-                      <div className="d-flex justify-content-center align-items-center mt-2">
-                        <small className="text-muted small">
-                          {moment.unix(day.dt).format("ddd, D MMMM")}
-                        </small>
+              forecast.aggregatedList &&
+              Object.values(forecast.aggregatedList).map((day) => (
+                <div key={day.date} className="col">
+                  <div className="container card mb-4 box-shadow p-3 cw-card">
+                    <div className="row">
+                      <h1>
+                        {kelvin2c(day.max)}° - {kelvin2c(day.min)}°
+                      </h1>
+                    </div>
+                    <div className="row">
+                      <div className="col text-nowrap">
+                        <small>{day.weather}</small>
+                        <br />
                       </div>
                     </div>
+
+                    <div className="d-flex justify-content-center align-items-center mt-2">
+                      <small className="text-muted small">
+                        {day.date.getDay() === new Date().getDay()
+                          ? "Today"
+                          : day.date.toDateString()}
+                      </small>
+                    </div>
                   </div>
-                ))}
+                </div>
+              ))}
           </div>
         </div>
       </div>
@@ -151,4 +181,4 @@ const City: FC<CityProps> = (props) => {
   );
 };
 
-export default City;
+export default Index;

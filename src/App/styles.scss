@@ -1,5 +1,7 @@
 :root {
   --clr-0: #fff;
+  --clr-dark-0: #333;
+
   --clr-grn-1: #052b2f;
   --clr-grn-2: #073438;
   --clr-grn-3: #0e4b50;
@@ -14,6 +16,23 @@
 }
 
 body {
-  background: var(--clr-0);
   min-width: 330px;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: var(--clr-0);
+    color: #222;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--clr-dark-0);
+    color: #fff;
+  }
+}
+
+.navbar.navbar-dark {
+  background: #232739;
 }

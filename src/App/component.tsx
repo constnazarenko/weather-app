@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import { loadAppFunc } from "./actions";
 import City from "./City";
 import Dashboard from "./Dashboard";
-import { Index } from "./Loading";
+import Loading from "./Loading";
 import "./styles.scss";
 
 export interface AppProps {
@@ -35,10 +35,10 @@ const App: FC<AppProps & AppActions> = (props) => {
 
   return (
     <div className={classNames({ app: true, no: false })}>
-      {props.loading && <Index />}
+      {props.loading && <Loading />}
 
       <header className="mb-4">
-        <div className="navbar navbar-dark bg-primary box-shadow">
+        <div className="navbar navbar-dark box-shadow">
           <div className="container d-flex justify-content-between">
             <div className="navbar-brand d-flex align-items-center">
               <strong>Weather APP example</strong>
@@ -62,7 +62,7 @@ const App: FC<AppProps & AppActions> = (props) => {
               Go back to Dashboard
             </a>
           </div>
-          <Suspense fallback={<Index />}>
+          <Suspense fallback={<Loading />}>
             <City cw={selectedCity} />
           </Suspense>
         </section>

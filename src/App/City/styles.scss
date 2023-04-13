@@ -1,0 +1,9 @@
+.city {
+  .card {
+    width: 12rem;
+  }
+
+  .card:nth-child(2n) {
+    flex-basis: 100%;
+  }
+}

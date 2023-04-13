@@ -10,7 +10,7 @@ import rootReducer from "./reducers";
 import sagas from "./sagas";
 
 import App from "./App";
-import { Index } from "./App/Loading";
+import Loading from "./App/Loading";
 
 const reduxLogger = createLogger({
   collapsed: true,
@@ -42,7 +42,7 @@ function onRender(
 }
 
 root.render(
-  <Suspense fallback={<Index />}>
+  <Suspense fallback={<Loading />}>
     <Profiler id="StrictMode" onRender={onRender}>
       <StrictMode>
         <Provider store={store}>
