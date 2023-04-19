@@ -16,29 +16,35 @@
 
 .dashboard {
   .card {
-    border: 1px solid var(--clr-blue-5);
+    background: var(--clr-bg-2);
+    border: 1px solid var(--clr-5);
+    color: var(--clr-font-2);
     cursor: pointer;
-  }
 
-  .card::before,
-  .card::after {
-    background: conic-gradient(
-      from var(--gradient-angle),
-      var(--clr-blue-3),
-      var(--clr-blue-4),
-      var(--clr-blue-5),
-      var(--clr-blue-4),
-      var(--clr-blue-3)
-    );
-    border-radius: inherit;
-    content: "";
-    inset: -0.075rem;
-    position: absolute;
-    z-index: -1;
-  }
+    .text-muted {
+      color: var(--clr-font-muted) !important;
+    }
 
-  .card:hover::after {
-    animation: rotation 2s linear infinite;
-    filter: blur(0.75rem);
+    &::before,
+    &::after {
+      background: conic-gradient(
+        from var(--gradient-angle),
+        var(--clr-3),
+        var(--clr-4),
+        var(--clr-5),
+        var(--clr-4),
+        var(--clr-3)
+      );
+      border-radius: inherit;
+      content: "";
+      inset: -0.075rem;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &:hover::after {
+      animation: rotation 2s linear infinite;
+      filter: blur(0.75rem);
+    }
   }
 }

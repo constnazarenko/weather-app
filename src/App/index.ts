@@ -8,3 +8,4 @@ const mapStateToProps = (state: ReduxStore) => {
 
 export default connect(mapStateToProps, { load })(App);
 export * from "./component";
+export { ThemeToggle } from "./ThemeToggle";

@@ -1,6 +1,13 @@
 .city {
   .card {
-    width: 12rem;
+    background: var(--clr-bg-2);
+    border-color: var(--clr-border);
+    color: var(--clr-font-2);
+    width: 13rem;
+
+    .text-muted {
+      color: var(--clr-font-muted) !important;
+    }
   }
 
   .card:nth-child(2n) {

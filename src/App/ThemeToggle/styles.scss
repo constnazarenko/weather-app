@@ -1,0 +1,122 @@
+#theme-toggle {
+  --size: 2rem;
+  --icon-fill: hsl(0, 0%, 82%);
+  --icon-fill-hover: hsl(210 10% 15%);
+  aspect-ratio: 1;
+
+  background: none;
+  block-size: var(--size);
+  border: 0;
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  inline-size: var(--size);
+
+  outline-offset: 5px;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  > svg {
+    block-size: 100%;
+    inline-size: 100%;
+    stroke-linecap: round;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    --icon-fill: hsl(210 10% 70%);
+    --icon-fill-hover: hsl(210 15% 90%);
+
+    .sun-and-moon > .sun {
+      transform: scale(1.75);
+      transition-duration: 0.25s;
+      transition-timing-function: var(--ease-3);
+    }
+
+    .sun-and-moon > .sun-beams {
+      opacity: 0;
+      transform: rotateZ(-25deg);
+      transition-duration: 0.15s;
+    }
+
+    .sun-and-moon > .moon > circle {
+      transform: translateX(-7px);
+      transition-delay: 0.25s;
+      transition-duration: 0.5s;
+
+      @supports (cx: 1) {
+        cx: 17;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    .sun-and-moon > .sun {
+      transform: scale(1);
+      transition-delay: 0.25s;
+      transition-duration: 0.25s;
+      transition-timing-function: var(--ease-3);
+    }
+
+    .sun-and-moon > .sun-beams {
+      opacity: 1;
+      transform: rotateZ(-25deg);
+      transition-delay: 0.25s;
+      transition-duration: 0.15s;
+    }
+
+    .sun-and-moon > .moon > circle {
+      transform: translateX(0);
+      transition-duration: 0.5s;
+
+      @supports (cx: 1) {
+        cx: 17;
+        transform: translateX(7px);
+      }
+    }
+  }
+
+  .sun-and-moon {
+    > :is(.moon, .sun, .sun-beams) {
+      transform-origin: center center;
+    }
+
+    > :is(.moon, .sun) {
+      fill: var(--icon-fill);
+    }
+
+    .theme-toggle:is(:hover, :focus-visible) > & {
+      > :is(.moon, .sun) {
+        fill: var(--icon-fill-hover);
+      }
+    }
+
+    > .sun-beams {
+      stroke: var(--icon-fill);
+      stroke-width: 2px;
+
+      .theme-toggle:is(:hover, :focus-visible) & {
+        stroke: var(--icon-fill-hover);
+      }
+    }
+
+    > .sun {
+      transition: transform 0.5s var(--ease-elastic-3);
+    }
+
+    > .sun-beams {
+      transition: transform 0.5s var(--ease-elastic-4),
+        opacity 0.5s var(--ease-3);
+    }
+
+    .moon > circle {
+      transition: transform 0.25s var(--ease-out-5);
+
+      @supports (cx: 1) {
+        transition: cx 0.25s var(--ease-out-5);
+      }
+    }
+  }
+}

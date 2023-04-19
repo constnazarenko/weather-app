@@ -7,6 +7,7 @@ import City from "./City";
 import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import "./styles.scss";
+import { ThemeToggle } from "./ThemeToggle";
 
 export interface AppProps {
   title: string;
@@ -34,17 +35,20 @@ const App: FC<AppProps & AppActions> = (props) => {
   const [selectedCity, selectCity] = useState<CityWeather | null>();
 
   return (
-    <div className={classNames({ app: true, no: false })}>
+    <div className={classNames({ app: true, no: false })} data-bs-theme="blue">
       {props.loading && <Loading />}
 
       <header className="mb-4">
-        <div className="navbar navbar-dark box-shadow">
+        <nav className="navbar navbar-dark box-shadow">
           <div className="container d-flex justify-content-between">
             <div className="navbar-brand d-flex align-items-center">
               <strong>Weather APP example</strong>
             </div>
+            <div data-theme="dark">
+              <ThemeToggle />
+            </div>
           </div>
-        </div>
+        </nav>
       </header>
 
       {!selectedCity && <Dashboard onSelect={selectCity} />}
@@ -57,7 +61,7 @@ const App: FC<AppProps & AppActions> = (props) => {
                 e.preventDefault();
                 selectCity(null);
               }}
-              className="btn btn-info text-bg-light my-2"
+              className="btn btn-link my-2"
             >
               Go back to Dashboard
             </a>

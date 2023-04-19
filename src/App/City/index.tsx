@@ -118,7 +118,7 @@ const Index: FC<CityProps> = (props) => {
   return (
     <div className="container city rounded mt-4">
       <div className="row">
-        <div className="col-4 bg-info bg-opacity-25 rounded p-3">
+        <div className="col-4 card bg-info bg-opacity-25 rounded p-3">
           <div className="row">
             <h1>{cw.name}</h1>
           </div>
