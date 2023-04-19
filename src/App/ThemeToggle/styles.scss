@@ -24,7 +24,7 @@
     stroke-linecap: round;
   }
 
-  @media (prefers-color-scheme: dark) {
+  :root.dark & {
     --icon-fill: hsl(210 10% 70%);
     --icon-fill-hover: hsl(210 15% 90%);
 
@@ -34,7 +34,8 @@
       transition-timing-function: var(--ease-3);
     }
 
-    .sun-and-moon > .sun-beams {
+    .sun-and-moon > .sun-beams-left,
+    .sun-and-moon > .sun-beams-right {
       opacity: 0;
       transform: rotateZ(-25deg);
       transition-duration: 0.15s;
@@ -52,7 +53,7 @@
     }
   }
 
-  @media (prefers-color-scheme: light) {
+  :root.light {
     .sun-and-moon > .sun {
       transform: scale(1);
       transition-delay: 0.25s;
@@ -60,7 +61,8 @@
       transition-timing-function: var(--ease-3);
     }
 
-    .sun-and-moon > .sun-beams {
+    .sun-and-moon > .sun-beams-left,
+    .sun-and-moon > .sun-beams-right {
       opacity: 1;
       transform: rotateZ(-25deg);
       transition-delay: 0.25s;
@@ -78,8 +80,36 @@
     }
   }
 
+  :root:not(.dark):not(.light) & {
+    --icon-fill: hsl(210 10% 70%);
+    --icon-fill-hover: hsl(210 15% 90%);
+
+    .sun-and-moon > .sun {
+      transform: scale(1);
+      transition-duration: 0.25s;
+      transition-timing-function: var(--ease-3);
+    }
+
+    .sun-and-moon > .sun-beams-right {
+      opacity: 0;
+      transform: rotateZ(-25deg);
+      transition-duration: 0.15s;
+    }
+
+    .sun-and-moon > .moon > circle {
+      transform: translateX(0);
+      transition-delay: 0.25s;
+      transition-duration: 0.5s;
+
+      @supports (cx: 1) {
+        cx: 17;
+        transform: translateX(0);
+      }
+    }
+  }
+
   .sun-and-moon {
-    > :is(.moon, .sun, .sun-beams) {
+    > :is(.moon, .sun, .sun-beams-left, .sun-beams-right) {
       transform-origin: center center;
     }
 
@@ -93,7 +123,8 @@
       }
     }
 
-    > .sun-beams {
+    > .sun-beams-left,
+    > .sun-beams-right {
       stroke: var(--icon-fill);
       stroke-width: 2px;
 
@@ -106,7 +137,8 @@
       transition: transform 0.5s var(--ease-elastic-3);
     }
 
-    > .sun-beams {
+    > .sun-beams-left,
+    > .sun-beams-right {
       transition: transform 0.5s var(--ease-elastic-4),
         opacity 0.5s var(--ease-3);
     }

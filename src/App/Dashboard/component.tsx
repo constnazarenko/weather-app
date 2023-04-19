@@ -6,8 +6,6 @@ import { kelvin2c } from "../tools";
 import { loadFunc } from "./actions";
 import "./styles.scss";
 
-// window.matchMedia("(prefers-color-scheme: dark)").matches;
-
 export interface City {
   name: string;
   photo: string;

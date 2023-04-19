@@ -1,49 +1,61 @@
-body {
-  min-width: 330px;
+@mixin light-theme {
+  --clr-bg: #fff;
+  --clr-bg-2: #fff;
+  --clr-bg-navbar: #526096;
+
+  --clr-border: #ddd;
+
+  --clr-font: #555;
+  --clr-font-2: #555;
+  --clr-font-muted: #6c757d;
+
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #0062ad;
+  --clr-4: #28a7d2;
+  --clr-5: #4dcaff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --clr-bg: #fff;
-    --clr-bg-2: #fff;
-    --clr-bg-navbar: #526096;
+@mixin dark-theme {
+  --clr-bg: #1b1b1b;
+  --clr-bg-2: #343434;
+  --clr-bg-navbar: #232739;
 
-    --clr-border: #858585;
+  --clr-border: #858585;
 
-    --clr-font: #555;
-    --clr-font-2: #555;
-    --clr-font-muted: #6c757d;
+  --clr-font: #ccc;
+  --clr-font-2: #cce;
+  --clr-font-muted: #8a8989;
 
-    --clr-1: #052b2f;
-    --clr-2: #073438;
-    --clr-3: #0062ad;
-    --clr-4: #28a7d2;
-    --clr-5: #4dcaff;
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+  --clr-5: #637c54;
+}
+
+:root.light {
+  @include light-theme;
+}
+
+:root.dark {
+  @include dark-theme;
+}
+
+// OS Default.
+:root:not(.light):not(.dark) {
+  @media (prefers-color-scheme: light) {
+    @include light-theme;
   }
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --clr-bg: #1b1b1b;
-    --clr-bg-2: #343434;
-    --clr-bg-navbar: #232739;
-
-    --clr-border: #858585;
-
-    --clr-font: #ccc;
-    --clr-font-2: #cce;
-    --clr-font-muted: #8a8989;
-
-    --clr-1: #052b2f;
-    --clr-2: #073438;
-    --clr-3: #0e4b50;
-    --clr-4: #2d8f85;
-    --clr-5: #637c54;
+  @media (prefers-color-scheme: dark) {
+    @include dark-theme;
   }
 }
 
 body {
   background: var(--clr-bg);
+  min-width: 330px;
 }
 
 .navbar.navbar-dark {
