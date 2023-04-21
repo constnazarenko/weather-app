@@ -1,11 +1,11 @@
 import { Action } from "redux";
 import { DB_FETCH_JSON } from "./const";
 
-export interface LoadAction extends Action {
-  payload: Record<string, never>;
+export interface LoadDBAction extends Action {
+  payload: Record<string, string>;
 }
-export type loadFunc = () => LoadAction;
-export const load: loadFunc = () => ({
+export type loadDBFunc = (cityName?: string) => LoadDBAction;
+export const loadDB: loadDBFunc = (cityName) => ({
   type: DB_FETCH_JSON,
-  payload: {},
+  payload: { cityName },
 });

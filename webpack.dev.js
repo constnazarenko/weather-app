@@ -13,6 +13,7 @@ module.exports = merge(common, {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/",
     filename: "[name].[fullhash].js",
+    assetModuleFilename: "images/[hash][ext][query]",
   },
   plugins: [
     new webpack.DefinePlugin({

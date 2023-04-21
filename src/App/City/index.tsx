@@ -64,7 +64,7 @@ interface Forcast {
   aggregatedList?: AggregatedList;
 }
 
-export const useWeatherForecast = (url) => {
+const useWeatherForecast = (url) => {
   const [state, setState] = useState<Forcast>(null);
 
   useEffect(() => {

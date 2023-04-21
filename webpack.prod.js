@@ -10,8 +10,9 @@ module.exports = merge(common, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, "./dist"),
+    assetModuleFilename: "images/[hash][ext][query]",
     filename: "index.js",
-    library: "FlexForm",
+    library: "WeatherAPP",
     libraryTarget: "umd",
     globalObject: "this",
     umdNamedDefine: true,

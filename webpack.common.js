@@ -17,11 +17,11 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/i,
         type: "asset/resource",
       },
       {
-        test: /\.(jpe?g|gif|png|wav|mp3)$/,
+        test: /\.(jpe?g|gif|png|wav|mp3)$/i,
         type: "asset/resource",
       },
     ],

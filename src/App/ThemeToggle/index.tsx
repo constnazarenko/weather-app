@@ -1,25 +1,50 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useEffect } from "react";
+import { ThemeContext, ThemeExplicitContext } from "../index";
 import "./styles.scss";
 
-export function ThemeToggle() {
-  const detectInitialTheme = (): string => {
-    const storedValue = localStorage.getItem("theme");
-    if (storedValue && (storedValue === "light" || storedValue === "dark")) {
-      document.documentElement.className = storedValue;
-      return storedValue;
-    }
-    return "os-default";
-  };
+export const detectInitialTheme = (): string => {
+  const storedValue = localStorage.getItem("theme");
+  if (storedValue && (storedValue === "light" || storedValue === "dark")) {
+    document.documentElement.className = storedValue;
+    return storedValue;
+  }
+  return "os-default";
+};
+export const detectOSTheme = (): string =>
+  window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+export const detectThemeExplicit = (theme: string): string =>
+  theme !== "os-default" ? theme : detectOSTheme();
 
-  const [theme, setTheme] = useState(detectInitialTheme());
+export function ThemeToggle() {
+  const { theme, setTheme } = useContext(ThemeContext);
+  const { themeExplicit, setThemeExplicit } = useContext(ThemeExplicitContext);
+
+  useEffect(() => {
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", ({ matches }) => {
+        if (theme === "os-default") {
+          setThemeExplicit(matches ? "dark" : "light");
+        }
+      });
+
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", ({ matches }) => {
+          console.log("clearing eventListener");
+        });
+    };
+  });
 
   const handleClick = useCallback(() => {
     const isOSDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     const switchTo = (side: "dark" | "light" | "os-default") => {
       setTheme(side);
+      setThemeExplicit(detectThemeExplicit(side));
       document.documentElement.className = side;
-      if (side === "dark" || side === "light") {
+      if (side !== "os-default") {
         localStorage.setItem("theme", side);
       } else {
         localStorage.removeItem("theme");
