@@ -32,7 +32,7 @@ export function ThemeToggle() {
       window
         .matchMedia("(prefers-color-scheme: dark)")
         .removeEventListener("change", ({ matches }) => {
-          console.log("clearing eventListener");
+          console.log("clearing eventListener!");
         });
     };
   });

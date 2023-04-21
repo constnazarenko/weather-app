@@ -11,7 +11,7 @@ module.exports = merge(common, {
   output: {
     path: path.resolve(__dirname, "./dist"),
     assetModuleFilename: "images/[hash][ext][query]",
-    filename: "index.js",
+    filename: "[name].[fullhash].js",
     library: "WeatherAPP",
     libraryTarget: "umd",
     globalObject: "this",
@@ -23,7 +23,7 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: "index.css",
+      filename: "[name].[fullhash].css",
     }),
     new webpack.DefinePlugin({
       "process.env.LOCAL": "false",
