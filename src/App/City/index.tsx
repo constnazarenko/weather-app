@@ -99,7 +99,11 @@ const useWeatherForecast = (url) => {
       }
     };
 
-    dataFetch();
+    try {
+      dataFetch();
+    } catch (e) {
+      setState(null);
+    }
 
     return () => {
       ignore = true;
@@ -110,6 +114,17 @@ const useWeatherForecast = (url) => {
 };
 
 const Index: FC<CityProps> = (props) => {
+  if (!props.cw?.coord?.lat) {
+    return (
+      <div className="container city rounded mt-4">
+        <div className="row">
+          <h1 className="text-bg-danger">
+            There is no weather data for this city
+          </h1>
+        </div>
+      </div>
+    );
+  }
   const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${props.cw.coord.lat}&lon=${props.cw.coord.lon}&appid=1827d8bc8210ab01b28b1546b538dd9d`;
   const { forecast } = useWeatherForecast(url);
 

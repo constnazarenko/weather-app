@@ -1,5 +1,6 @@
 import React, { FC, useContext, useEffect } from "react";
 
+import classNames from "classnames";
 import moment from "moment/moment";
 import DayPlaceholder from "../../images/city_day.png";
 import NightPlaceholder from "../../images/city_night.png";
@@ -33,7 +34,12 @@ const DB: FC<DBHandlers & DBProps & DBActions> = (props) => {
   }, []);
 
   const handleSelect = (cw: CityWeather) => {
-    return () => props.onSelect(cw);
+    return () => {
+      if (!cw.coord) {
+        return;
+      }
+      props.onSelect(cw);
+    };
   };
 
   const handleSearchChange = () => {
@@ -57,7 +63,12 @@ const DB: FC<DBHandlers & DBProps & DBActions> = (props) => {
               key={`${ind}${city.name}`}
               onClick={handleSelect(city.weather)}
             >
-              <div className="card box-shadow h-100">
+              <div
+                className={classNames({
+                  "card box-shadow h-100": true,
+                  "pe-none": !city.weather.coord,
+                })}
+              >
                 <div className="card-img-top text-white p-0 overlay">
                   <h3 className="position-absolute m-3 bg-dark bg-opacity-25 rounded p-2">
                     {city.name}
