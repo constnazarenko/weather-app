@@ -1,6 +1,6 @@
 @mixin light-theme {
   --clr-bg: #fff;
-  --clr-bg-2: #fff;
+  --clr-bg-2: #f7f7f7;
   --clr-bg-navbar: #526096;
 
   --clr-border: #ddd;
@@ -11,9 +11,37 @@
 
   --clr-1: #052b2f;
   --clr-2: #073438;
+
   --clr-3: #0062ad;
   --clr-4: #28a7d2;
   --clr-5: #4dcaff;
+
+  --right: #f8cde8;
+  --left: #b9ddff;
+
+  --clr-odd-1: #e92a67;
+  --clr-odd-2: #a853ba;
+  --clr-odd-3: #2a8af6;
+  --clr-odd-4: rgba(42, 138, 246, 0);
+}
+
+@mixin dark-theme-green {
+  --clr-bg: #1b1b1b;
+  --clr-bg-2: #343434;
+  --clr-bg-navbar: #232739;
+
+  --clr-border: #858585;
+
+  --clr-font: #ccc;
+  --clr-font-2: #cce;
+  --clr-font-muted: #8a8989;
+
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+  --clr-5: #637c54;
 }
 
 @mixin dark-theme {
@@ -27,11 +55,20 @@
   --clr-font-2: #cce;
   --clr-font-muted: #8a8989;
 
-  --clr-1: #052b2f;
+  --clr-1: #e92a66;
   --clr-2: #073438;
-  --clr-3: #0e4b50;
+
+  --clr-3: #e92a66;
   --clr-4: #2d8f85;
-  --clr-5: #637c54;
+  --clr-5: #427ae5;
+
+  --clr-odd-1: #e92a67;
+  --clr-odd-2: #a853ba;
+  --clr-odd-3: #2a8af6;
+  --clr-odd-4: rgba(42, 138, 246, 0);
+
+  --right: #4c2638;
+  --left: #223b67;
 }
 
 :root.light {
@@ -60,4 +97,52 @@ body {
 
 .navbar.navbar-dark {
   background: var(--clr-bg-navbar);
+}
+
+#bg-grid-container {
+  height: 100vw;
+  overflow: hidden;
+  position: fixed;
+  transition: perspective 3s ease 0s;
+  width: 100vw;
+  z-index: -6;
+
+  .bg-grid {
+    inset: 0;
+    position: absolute;
+
+    &::before {
+      animation: bg-grid-animation 60s linear infinite;
+      background-image: linear-gradient(
+        to right,
+        var(--left) 45%,
+        transparent 50%,
+        var(--right) 55%
+      );
+      content: "";
+      height: 200%;
+      inset: -100% 0;
+      -webkit-mask-image: linear-gradient(90deg, #000 2px, transparent 0),
+        linear-gradient(180deg, #000 2px, transparent 0);
+      mask-image: linear-gradient(90deg, #000 2px, transparent 0),
+        linear-gradient(180deg, #000 2px, transparent 0);
+      -webkit-mask-repeat: repeat;
+      mask-repeat: repeat;
+      -webkit-mask-size: 60px 60px;
+      mask-size: 60px 60px;
+      position: absolute;
+      transform: translateY(0);
+      width: 100%;
+    }
+  }
+
+  @keyframes bg-grid-animation {
+    0% {
+      transform: translateY(0);
+    }
+
+    to {
+      transform: translateY(calc(50% + 28px));
+    }
+  }
 }

@@ -1,6 +1,7 @@
 {
   "extends": ["stylelint-config-sass-guidelines","stylelint-config-prettier-scss"],
   "rules": {
+    "property-no-vendor-prefix": null,
     "max-nesting-depth": 10,
     "selector-max-compound-selectors": 10,
     "selector-max-id": 2,

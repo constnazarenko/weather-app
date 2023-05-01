@@ -6,6 +6,10 @@
 
 @keyframes rotation {
   0% {
+    --gradient-angle: 360deg;
+  }
+
+  50% {
     --gradient-angle: 0deg;
   }
 
@@ -17,34 +21,40 @@
 .dashboard {
   .card {
     background: var(--clr-bg-2);
-    border: 1px solid var(--clr-5);
+    border: 0;
     color: var(--clr-font-2);
     cursor: pointer;
+
+    //background: transparent;
+    //.card-body, .card-img-top {
+    //  opacity: 0;
+    //}
 
     .text-muted {
       color: var(--clr-font-muted) !important;
     }
+  }
 
-    &::before,
-    &::after {
+  .col-md-4 > .card {
+    &::before {
       background: conic-gradient(
         from var(--gradient-angle),
-        var(--clr-3),
-        var(--clr-4),
-        var(--clr-5),
-        var(--clr-4),
-        var(--clr-3)
+        var(--clr-odd-1) 0deg,
+        var(--clr-odd-2) 112.5deg,
+        var(--clr-odd-3) 228.75deg,
+        var(--clr-odd-4) 360deg
       );
       border-radius: inherit;
       content: "";
-      inset: -0.075rem;
       position: absolute;
+      transition: filter 5s linear 0.5s;
       z-index: -1;
     }
 
-    &:hover::after {
+    &:hover::before {
       animation: rotation 2s linear infinite;
-      filter: blur(0.75rem);
+      filter: blur(15px);
+      inset: -1px;
     }
   }
 }

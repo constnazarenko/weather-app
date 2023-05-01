@@ -41,13 +41,16 @@ const App: FC<AppProps> = (props) => {
   return (
     <ThemeExplicitContext.Provider value={{ themeExplicit, setThemeExplicit }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
+        <div id="bg-grid-container">
+          <div className="bg-grid"></div>
+        </div>
         <div
           className={classNames({ app: true, no: false })}
           data-bs-theme="blue"
         >
           {props.loading && <Loading />}
 
-          <header className="mb-4">
+          <header>
             <nav className="navbar navbar-dark box-shadow">
               <div className="container d-flex justify-content-between">
                 <div className="navbar-brand d-flex align-items-center">
@@ -58,26 +61,28 @@ const App: FC<AppProps> = (props) => {
             </nav>
           </header>
 
-          {!selectedCity && <Dashboard onSelect={selectCity} />}
-          {!!selectedCity && (
-            <section>
-              <div className="container p-0">
-                <a
-                  href="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    selectCity(null);
-                  }}
-                  className="btn btn-link my-2"
-                >
-                  Go back to Dashboard
-                </a>
-              </div>
-              <Suspense fallback={<Loading />}>
-                <City cw={selectedCity} />
-              </Suspense>
-            </section>
-          )}
+          <main className="pt-4">
+            {!selectedCity && <Dashboard onSelect={selectCity} />}
+            {!!selectedCity && (
+              <section>
+                <div className="container p-0">
+                  <a
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      selectCity(null);
+                    }}
+                    className="btn btn-link my-2"
+                  >
+                    Go back to Dashboard
+                  </a>
+                </div>
+                <Suspense fallback={<Loading />}>
+                  <City cw={selectedCity} />
+                </Suspense>
+              </section>
+            )}
+          </main>
         </div>
       </ThemeContext.Provider>
     </ThemeExplicitContext.Provider>
