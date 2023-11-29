@@ -17,25 +17,22 @@ export const detectThemeExplicit = (theme: string): string =>
 
 export function ThemeToggle() {
   const { theme, setTheme } = useContext(ThemeContext);
-  const { themeExplicit, setThemeExplicit } = useContext(ThemeExplicitContext);
+  const { setThemeExplicit } = useContext(ThemeExplicitContext);
+  const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+  const themeChange = useCallback(({ matches }) => {
+    if (document.documentElement.className === "os-default") {
+      setThemeExplicit(matches ? "dark" : "light");
+    }
+  }, []);
 
   useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", ({ matches }) => {
-        if (theme === "os-default") {
-          setThemeExplicit(matches ? "dark" : "light");
-        }
-      });
+    mediaQuery.addEventListener("change", themeChange);
 
     return () => {
-      window
-        .matchMedia("(prefers-color-scheme: dark)")
-        .removeEventListener("change", ({ matches }) => {
-          console.log("clearing eventListener!");
-        });
+      mediaQuery.removeEventListener("change", themeChange);
     };
-  });
+  }, []);
 
   const handleClick = useCallback(() => {
     const isOSDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
