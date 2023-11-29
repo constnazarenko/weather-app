@@ -25,25 +25,6 @@
   --clr-odd-4: rgba(42, 138, 246, 0);
 }
 
-@mixin dark-theme-green {
-  --clr-bg: #1b1b1b;
-  --clr-bg-2: #343434;
-  --clr-bg-navbar: #232739;
-
-  --clr-border: #858585;
-
-  --clr-font: #ccc;
-  --clr-font-2: #cce;
-  --clr-font-muted: #8a8989;
-
-  --clr-1: #052b2f;
-  --clr-2: #073438;
-
-  --clr-3: #0e4b50;
-  --clr-4: #2d8f85;
-  --clr-5: #637c54;
-}
-
 @mixin dark-theme {
   --clr-bg: #1b1b1b;
   --clr-bg-2: #343434;
@@ -61,6 +42,33 @@
   --clr-3: #e92a66;
   --clr-4: #2d8f85;
   --clr-5: #427ae5;
+
+  --clr-odd-1: #e92a67;
+  --clr-odd-2: #a853ba;
+  --clr-odd-3: #2a8af6;
+  --clr-odd-4: rgba(42, 138, 246, 0);
+
+  --right: #4c2638;
+  --left: #223b67;
+}
+
+@mixin dark-theme-green {
+  --clr-bg: #1b1b1b;
+  --clr-bg-2: #343434;
+  --clr-bg-navbar: #232739;
+
+  --clr-border: #858585;
+
+  --clr-font: #ccc;
+  --clr-font-2: #cce;
+  --clr-font-muted: #8a8989;
+
+  --clr-1: #052b2f;
+  --clr-2: #073438;
+
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+  --clr-5: #637c54;
 
   --clr-odd-1: #e92a67;
   --clr-odd-2: #a853ba;
